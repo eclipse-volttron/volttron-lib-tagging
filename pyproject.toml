@@ -13,7 +13,7 @@ include = ["data_model"]
 
 [tool.poetry.dependencies]
 python = ">=3.10,<4.0"
-#volttron = ">=10.0.3a9,<11.0"
+volttron = ">=10.0.3a9,<11.0"
 ply = "^3.11"
 
 [tool.poetry.group.dev.dependencies]
@@ -30,9 +30,9 @@ coverage = "^6.3.2"
 pytest-cov = "^3.0.0"
 Sphinx = "^6.0.0"
 sphinx-rtd-theme = "^1.2.0"
-#volttron-testing = "^0.4.0rc3"
-volttron = {path = "../volttron-core", develop = true}
-volttron-testing = {path = "../volttron-testing", develop = true}
+volttron-testing = "^0.4.0rc3"
+#volttron = {path = "../volttron-core", develop = true}
+#volttron-testing = {path = "../volttron-testing", develop = true}
 
 [tool.yapfignore]
 ignore_patterns = [
