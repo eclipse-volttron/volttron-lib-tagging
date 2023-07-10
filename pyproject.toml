@@ -31,8 +31,6 @@ pytest-cov = "^3.0.0"
 Sphinx = "^6.0.0"
 sphinx-rtd-theme = "^1.2.0"
 volttron-testing = "^0.4.0rc3"
-#volttron = {path = "../volttron-core", develop = true}
-#volttron-testing = {path = "../volttron-testing", develop = true}
 
 [tool.yapfignore]
 ignore_patterns = [
