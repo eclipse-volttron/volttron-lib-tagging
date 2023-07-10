@@ -7,10 +7,10 @@
 VOLTTRON base tagging library that provide common tagging api for users to associate haystack based tags and values to 
 topic names and topic name prefixes. Implementing agents can persist tags in specific data store. 
 
-Tags used by this agent have to be pre-defined in a resource file at volttron_data/tagging_resources. The
+Tags used by this base agent are pre-defined in resource files under the directory 'data_model'. The base 
 agent validates against this predefined list of tags every time user add tags to topics. Tags can be added to one 
-topic at a time or multiple topics by using a topic name pattern(regular expression). This agent uses tags from 
-[project haystack](https://project-haystack.org/) and adds a few custom tags for campus and VOLTTRON point name.
+topic at a time or multiple topics by using a topic name pattern(regular expression). This agent uses version 3 tags  
+from [project haystack](https://project-haystack.org/) and adds a few custom tags for campus and VOLTTRON point name.
 
 Each tag has an associated value and users can query for topic names based tags and its values using a simplified 
 sql-like query string. Queries can specify tag names with values or tags without values for boolean tags(markers). 

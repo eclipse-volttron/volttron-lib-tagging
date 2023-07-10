@@ -279,6 +279,24 @@ Step 2: Create tags using template above
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Make an RPC call to the add_tags method and pass the python dictionary object
 
+For example:
+    .. code-block:: python
+
+        agent.vip.rpc.call(
+                'platform.tagging', 'add_tags',
+                tags={
+                    'campus.*/d.*/p1': {'point': True, 'maxVal': 15, 'minVal': -1},
+                    'campus.*/d.*/p2': {'point': True, 'maxVal': 10, 'minVal': 0,
+                                        'dis': "Test description"},
+                    'campus.*/d.*/p3': {'point': True, 'maxVal': 5, 'minVal': 1,
+                                        'dis': "Test description"},
+                    'campus.*/d1': {'equip': True, 'elec': True, 'phase': 'p1_1',
+                                    'dis': "Test description"},
+                    'campus.*/d2': {'equip': True, 'elec': True,
+                                    'phase': 'p2'},
+                    'campus1/d.*': {'campusRef': 'campus1'},
+                    'campus2/d.*': {'campusRef': 'campus2'}}).get(timeout=10)
+
 Step 3: Create tags specific to a point or device
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Any tags that were not included in step one and needs to be added later can be

@@ -97,11 +97,9 @@ class BaseTaggingAgent(Agent):
         - :py:meth:`BaseTaggingAgent.load_tag_refs`
 
         """
-        # load resources and make it available for implementing classes
+        # load resources and make it available for implementing classes.
         # Implementing classes can load this and/or other (additional) files
         #  as they see fit.
-
-        os.path.realpath(__file__)
 
         self.setup()
         self.load_valid_tags()
