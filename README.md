@@ -7,9 +7,9 @@
 VOLTTRON base tagging library that provide common tagging api for users to associate haystack based tags and values to 
 topic names and topic name prefixes. Implementing agents can persist tags in specific data store. 
 
-Tags used by this agent have to be pre-defined in a resource file at volttron_data/tagging_resources. The
-agent validates against this predefined list of tags every time user add tags to topics. Tags can be added to one 
-topic at a time or multiple topics by using a topic name pattern(regular expression). This agent uses tags from 
+Tags used by this library have to be pre-defined in a resource file at volttron_data/tagging_resources. The
+library validates against this predefined list of tags every time user add tags to topics. Tags can be added to one 
+topic at a time or multiple topics by using a topic name pattern(regular expression). This library uses tags from 
 [project haystack](https://project-haystack.org/) and adds a few custom tags for campus and VOLTTRON point name.
 
 Each tag has an associated value and users can query for topic names based tags and its values using a simplified 
@@ -29,16 +29,16 @@ automatically install volttron-lib-tagging into the same python environment
 
 ## Dependencies and Limitations
 
-1. When adding tags to topics this agent calls the platform.historian\'s (or a configured historian's) 
-   get_topic_list and hence requires a platform.historian or configured historian to be running but it doesn\'t require 
+1. When adding tags to topics this library calls the platform.historian's (or a configured historian's) 
+   get_topic_list and hence requires a platform.historian or configured historian to be running, but it doesn't require 
    the historian to use sqlite3 or any specific database. It requires historian to be running only for using this 
    api (add_tags) and does not require historian to be running for any other api. 
 2. Resource files that provides the list of valid tags is mandatory and should be in 
    data_model/tags.csv
-3. Tagging agent only provides APIs query for topic names based on tags. Once the list of topic names is retrieved, 
+3. Tagging library only provides APIs to query for topic names based on tags. Once the list of topic names is retrieved, 
    users should use the historian APIs to get the data corresponding to those topics. 
-4. Current version of tagging agent does not support versioning of tag/values. When tags values set using tagging 
-   agent's APIs update/overwrite any existing tag entries in the database
+4. Current version of tagging library does not support versioning of tag/values. When tags values are set it will 
+   overwrite any existing tag entries in the database
 
 ## Development
 
