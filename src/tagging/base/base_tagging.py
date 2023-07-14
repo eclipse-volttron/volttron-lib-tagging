@@ -55,6 +55,7 @@ condition for querying topics based on tags. Please see documentation of
 import logging
 import os
 import re
+from importlib.resources import path as get_path
 
 from abc import abstractmethod
 
@@ -79,8 +80,7 @@ class BaseTaggingAgent(Agent):
         if historian_vip_identity is None:
             self.historian_vip_identity = PLATFORM_HISTORIAN
         current_dir = os.path.dirname(os.path.abspath(__file__))
-        self.resource_sub_dir = os.path.join(current_dir, "../../..",
-                                             "data_model")
+        self.resource_sub_dir = str(get_path('tagging','data_model'))
         if not os.path.isdir(self.resource_sub_dir):
             raise ValueError("Unable to access resources directory: " +
                              self.resource_sub_dir)

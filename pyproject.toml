@@ -9,7 +9,9 @@ repository = "https://github.com/eclipse-volttron/volttron-lib-tagging"
 homepage = "https://github.com/eclipse-volttron/volttron-lib-tagging"
 keywords = []
 packages = [ { include = "tagging", from = "src" }, { include = "tagging", from = "tests" } ]
-include = ["data_model"]
+
+[tool.setuptools.package-data]
+"tagging.data_model" = ["*"]
 
 [tool.poetry.dependencies]
 python = ">=3.10,<4.0"
