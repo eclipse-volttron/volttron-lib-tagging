@@ -1,41 +1,67 @@
 .. _Base-Tagging-Agent:
 
 ===============
-Tagging Service
+Tagging Library
 ===============
 
 ***********
 Description
 ***********
-Tagging service provides VOLTTRON users the ability to add semantic tags to different topics so that topic can be
-queried by tags instead of specific topic name or topic name pattern.
+Tagging library provides VOLTTRON users the ability to add semantic tags to topics/topic prefixes, enabling query based
+semantic tags instead of specific topic name or topic name pattern.
+
+This library, `volttron-lib-tagging, <https://pypi.org/project/volttron-lib-tagging/>`_ provides
+
+1. a `BaseTaggingAgent <https://github.com/eclipse-volttron/volttron-lib-tagging/blob/develop/src/tagging/base/base_tagging.py>`_
+   that implementing agents can extend to store tag data in a specific data store. For example,
+   `SQLiteTaggingAgent <https://github.com/schandrika/volttron-sqlite-tagging/blob/develop/src/tagging/sqlite/tagging.py>`_
+   extends the BaseTaggingAgent and stores the tag data in a SQLite3 database
+2. a data_model directory that has a list of haystack3 tags, tag categories, tag units.
+3. a simplified sql-like query language to query for topic names based on tags. Queries can specify tag names with
+   values or tags without values (for boolean tags or markers). Queries can also combine multiple conditions with
+   keyword AND, and OR, and use the keyword NOT to negate a conditions.
 
 ********
 Taxonomy
 ********
-VOLLTTRON will use tags from `Project Haystack3 <http://project-haystack.org/tag>`_. Tags defined in haystack will be
-imported into VOLTTRON and grouped by categories to tag either topic or topic name prefix.
+This framework uses tags from `Project Haystack3 <http://project-haystack.org/tag>`_. Tags defined by haystack version 3
+are imported into VOLTTRON and grouped by categories. This is used to tag topics or topic name prefixes.
 
-**********
-Dependency
-**********
-Once data in VOLTTRON has been tagged, users will be able to query topics based on tags and use the resultant topics
-to query the historian
+****************************
+Dependencies and Limitations
+****************************
+
+1. When adding tags to topics this library calls the platform.historian's (or a configured historian's)
+   get_topic_list and hence requires a platform.historian or configured historian to be running, but it doesn't require
+   the historian to use sqlite3 or any specific database. It requires historian to be running only for using this
+   api (add_tags) and does not require historian to be running for any other api.
+2. Resource files that provides the list of valid tags is mandatory and should be in
+   data_model/tags.csv
+3. Tagging library only provides APIs to query for topic names based on tags. Once the list of topic names is retrieved,
+   users should use the historian APIs to get the data corresponding to those topics.
+4. Current version of tagging library does not support versioning of tag/values. When tags values are set it will
+   overwrite any existing tag entries in the database
 
 ********
 Features
 ********
 
- 1. User should be able to tag individual components of a topic such as campus, building, device, point etc.
- 2. Using the tagging service users should only be able to add tags already defined in the volttron tagging schema.
-    New tags should be explicitly added to the tagging schema before it can be used to tag topics or topic prefix
- 3. Users should be able batch process and tag multiple topic names or topic prefix using a template. At the end of
-    this, users should be notified about the list of topics that did not confirm to the template. This will help users
-    to individually add or edit tags for those specific topics
+ 1. User can tag individual components of a topic such as campus, building, device, point etc.
+ 2. Using the tagging service users can only add tags already defined in the volttron tagging schema.
+    New tags should be explicitly added to the tagging schema before it can be used to tag a topic or topic prefix
+ 3. Users can batch process and tag multiple topic names or topic prefix using simple pattern matching.
  4. When users query for topics based on a tag, the results would correspond to the current metadata values. It is up
     to the calling agent/application to periodically query for latest updates if needed.
- 5. Users should be able query based on tags on a specific topic or its topic prefix/parents
- 6. Allow for count and skip parameters in queries to restrict count and allow pagination
+ 5. Users should be able query based on tags on a specific topic or its topic prefix/parents. Query API supports
+   count and skip parameters to restrict count and allow pagination
+
+*************
+Configuration
+*************
+
+The base tagging agent supports a single optional configuration, historian_vip_identity, that points to the vip identity
+of the historian that should be queried when attempting to find topics that match a given topic pattern. By default this
+points to "platform.historian"
 
 ***
 API
