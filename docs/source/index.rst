@@ -1,14 +1,14 @@
 .. _Base-Tagging-Agent:
 
-===============
-Tagging Library
-===============
+=================
+Tagging Framework
+=================
 
 ***********
 Description
 ***********
-Tagging library provides VOLTTRON users the ability to add semantic tags to topics/topic prefixes, enabling query based
-semantic tags instead of specific topic name or topic name pattern.
+Tagging framework provides VOLTTRON users the ability to add semantic tags to topics/topic prefixes, enabling query
+based on semantic tags instead of specific topic name or topic name pattern.
 
 This library, `volttron-lib-tagging, <https://pypi.org/project/volttron-lib-tagging/>`_ provides
 
